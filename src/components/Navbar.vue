@@ -56,7 +56,8 @@ const navItems: NavItem[] = [
   { id: 'tienda', label: 'Tienda del Taller' },
   { id: 'clases', label: 'Clases' },
   { id: 'exposicion', label: 'Exposición y Prensa' },
-  { id: 'trabajos', label: 'Trabajos más locos' }
+  { id: 'trabajos', label: 'Trabajos más locos' },
+  { id: 'contacto', label: 'Contacto' }
 ]
 
 const isMenuOpen = ref(false)
