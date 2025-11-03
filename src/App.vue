@@ -16,9 +16,9 @@ import ContactoSection from './components/sections/ContactoSection.vue'
     
     <main>
       <HomeSection />
-      <QuienSoySection />
       <TiendaSection />
       <ClasesSection />
+      <QuienSoySection />
       <ExposicionSection />
       <TrabajosSection />
       <ContactoSection />

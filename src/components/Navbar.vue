@@ -2,9 +2,7 @@
   <nav class="bg-white border-b border-gray-200 fixed w-full z-50 top-0 left-0 shadow-sm">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="#home" class="flex items-center space-x-3">
-        <span class="self-center text-2xl font-semibold whitespace-nowrap" style="color: var(--earth-brown)">
-          AkuNeko
-        </span>
+        <img src="@/assets/navbarlogo.jpg" alt="AkuNeko Logo" class="h-20 w-30">
       </a>
       
       <button
@@ -52,9 +50,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { id: 'home', label: 'Home' },
-  { id: 'quien-soy', label: 'Quién soy' },
   { id: 'tienda', label: 'Tienda del Taller' },
   { id: 'clases', label: 'Clases' },
+  { id: 'quien-soy', label: 'Quién soy' },
   { id: 'exposicion', label: 'Exposición y Prensa' },
   { id: 'trabajos', label: 'Trabajos más locos' },
   { id: 'contacto', label: 'Contacto' }

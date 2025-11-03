@@ -3,15 +3,14 @@
     <div class="container">
       <h2 class="text-center">Tienda del Taller</h2>
       <div class="accent-line mx-auto"></div>
-      <p class="text-center max-w-2xl mx-auto mb-12">
-        Descubre mi colección de piezas únicas de cerámica gres. 
-        Cada obra está hecha a mano con dedicación y amor por el oficio.
+      <p class="text-align-left max-w-2xl mx-auto mb-12">
+        En La Tienda encontraras el detalle de decoración o el regalo perfecto para matrimonios o amigos o simplemente algo que necesitas a precios "taller"!
       </p>
 
       <div class="grid-3 mb-12">
         <div class="ceramic-card" v-for="item in shopItems" :key="item.id">
           <div class="image-placeholder" :style="{ height: '250px' }">
-            <span>{{ item.icon }} {{ item.title }}</span>
+            <img :src="item.image" :alt="item.title" class="w-full h-full object-cover rounded-lg" />
           </div>
           <h3 class="text-xl mb-2">{{ item.title }}</h3>
           <p class="text-gray-600 mb-4">{{ item.description }}</p>
@@ -48,6 +47,7 @@ interface ShopItem {
   description: string
   price: number
   icon: string
+  image: string
 }
 
 const shopItems: ShopItem[] = [
@@ -56,42 +56,48 @@ const shopItems: ShopItem[] = [
     title: 'Tazas Artesanales',
     description: 'Tazas de gres hechas a mano, perfectas para tu café o té favorito.',
     price: 28,
-    icon: '☕'
+    icon: '☕',
+    image: '/assets/tienda/tienda1.jpg'
   },
   {
     id: 2,
     title: 'Platos Decorativos',
     description: 'Platos únicos con acabados naturales y diseños orgánicos.',
     price: 45,
-    icon: '🍽️'
+    icon: '🍽️',
+    image: '/assets/tienda/tienda2.jpg'
   },
   {
     id: 3,
     title: 'Jarrones',
     description: 'Jarrones de diferentes tamaños con texturas y colores tierra.',
     price: 65,
-    icon: '🏺'
+    icon: '🏺',
+    image: '/assets/tienda/tienda3.jpg'
   },
   {
     id: 4,
     title: 'Bowls',
     description: 'Bowls versátiles para servir o decorar, con esmaltes únicos.',
     price: 35,
-    icon: '🥣'
+    icon: '🥣',
+    image: '/assets/tienda/tienda1.jpg'
   },
   {
     id: 5,
     title: 'Teteras',
     description: 'Teteras funcionales con diseños elegantes y contemporáneos.',
     price: 85,
-    icon: '🫖'
+    icon: '🫖',
+    image: '/assets/tienda/tienda2.jpg'
   },
   {
     id: 6,
     title: 'Esculturas',
     description: 'Piezas escultóricas únicas, perfectas como elementos decorativos.',
     price: 120,
-    icon: '🗿'
+    icon: '🗿',
+    image: '/assets/tienda/tienda3.jpg'
   }
 ]
 </script>
