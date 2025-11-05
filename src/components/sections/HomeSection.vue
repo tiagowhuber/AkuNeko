@@ -3,12 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentIndex = ref(0)
 const images = [
-  '/src/assets/homepics/homepic1.jpg',
-  '/src/assets/homepics/homepic2.jpg',
-  '/src/assets/homepics/homepic3.jpg',
-  '/src/assets/homepics/homepic4.jpg',
-  '/src/assets/homepics/homepic5.jpg',
-  '/src/assets/homepics/homepic6.jpg'
+  '/homepics/homepic1.jpg',
+  '/homepics/homepic2.jpg',
+  '/homepics/homepic3.jpg',
+  '/homepics/homepic4.jpg',
+  '/homepics/homepic5.jpg',
+  '/homepics/homepic6.jpg'
 ]
 
 let autoplayInterval: number | null = null
