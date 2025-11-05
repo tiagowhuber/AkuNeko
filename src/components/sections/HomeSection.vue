@@ -76,7 +76,7 @@ onUnmounted(() => {
     <div class="container">
       <div class="grid md:grid-cols-2 gap-0 items-center">
         <div class="fade-in-up">
-          <h1>Cerámica Gres Artesanal</h1>
+          <h1 class="elms-sans-title">Cerámica Gres Artesanal</h1>
           <div class="accent-line"></div>
         </div>
         
@@ -131,6 +131,20 @@ onUnmounted(() => {
             style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
             >
             Clases
+            </a>
+            <a 
+            href="#quien-soy" 
+            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6 mr-4"
+            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+            >
+            Quién Soy
+            </a>
+            <a 
+            href="#contacto" 
+            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6"
+            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+            >
+            Contacto
             </a>
         </div>
       </div>
@@ -234,5 +248,11 @@ onUnmounted(() => {
   .carousel-arrow {
     display: none;
   }
+}
+
+.elms-sans-title {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: bold;
+  font-size: 2rem;
 }
 </style>

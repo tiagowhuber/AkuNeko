@@ -13,6 +13,20 @@
   --charcoal: #3A3A3A;
 }
 
+@font-face {
+  font-family: "Elms Sans";
+  src: url("/src/assets/fonts/Elms_Sans/ElmsSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Elms Sans";
+  src: url("/src/assets/fonts/Elms_Sans/ElmsSans-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
 * {
   margin: 0;
   padding: 0;
