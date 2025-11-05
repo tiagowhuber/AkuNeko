@@ -65,15 +65,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import tienda1 from '@/assets/tienda/tienda1.jpg';
-import tienda2 from '@/assets/tienda/tienda2.jpg';
-import tienda3 from '@/assets/tienda/tienda3.jpg';
-import tienda4 from '@/assets/tienda/tienda4.jpg';
-import tienda5 from '@/assets/tienda/tienda5.jpeg';
-import tienda6 from '@/assets/tienda/tienda6.jpeg';
-import tienda7 from '@/assets/tienda/tienda7.jpeg';
-import tienda8 from '@/assets/tienda/tienda8.jpeg';
-import tienda9 from '@/assets/tienda/tienda9.jpg';
+import tienda1 from '/tienda/tienda1.jpg';
+import tienda2 from '/tienda/tienda2.jpg';
+import tienda3 from '/tienda/tienda3.jpg';
+import tienda4 from '/tienda/tienda4.jpg';
+import tienda5 from '/tienda/tienda9.jpg';
+import tienda6 from '/tienda/tienda6.jpeg';
+import tienda7 from '/tienda/tienda7.jpeg';
+import tienda8 from '/tienda/tienda8.jpeg';
+import tienda9 from '/tienda/tienda5.jpeg';
 
 interface ShopItem {
   id: number

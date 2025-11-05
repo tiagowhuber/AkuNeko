@@ -3,9 +3,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentIndex = ref(0)
 const images = [
-  '/src/assets/QuienSoy/quiensoy1.jpg',
-  '/src/assets/QuienSoy/quiensoy2.jpg',
-  '/src/assets/QuienSoy/quiensoy3.jpg'
+  '/QuienSoy/quiensoy1.jpg',
+  '/QuienSoy/quiensoy2.jpg',
+  '/QuienSoy/quiensoy3.jpg'
 ]
 
 let autoplayInterval: number | null = null
