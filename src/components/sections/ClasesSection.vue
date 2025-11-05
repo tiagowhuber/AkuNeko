@@ -1,58 +1,47 @@
 <template>
   <section id="clases" class="bg-white">
     <div class="container">
-      <h2 class="text-center">Clases de Cerámica</h2>
+      <h2 class="text-center elms-sans-title">Clases de Cerámica</h2>
       <div class="accent-line mx-auto"></div>
-      <p class="text-center max-w-2xl mx-auto mb-12">
-        Aprende el arte de la cerámica en un ambiente creativo y relajado. 
-        Clases para todos los niveles, desde principiantes hasta avanzados.
+      <p class="text-center max-w-2xl mx-auto mb-12 elms-sans-text">
+        Este año hemos completado todos los cupos, pero los invitamos cordialmente a visitar nuestro taller.
       </p>
 
-      <div class="grid-2 mb-12">
-        <div class="ceramic-card" v-for="course in courses" :key="course.id">
-          <div class="image-placeholder" :style="{ height: '200px' }">
-            <span>{{ course.icon }} {{ course.title }}</span>
-          </div>
-          <h3 class="mb-3">{{ course.title }}</h3>
-          <p class="text-gray-600 mb-4">{{ course.description }}</p>
-          
-          <div class="space-y-2 mb-4 text-sm">
-            <div class="flex items-center">
-              <span class="font-semibold mr-2" style="color: var(--clay-dark)">Duración:</span>
-              <span>{{ course.duration }}</span>
-            </div>
-            <div class="flex items-center">
-              <span class="font-semibold mr-2" style="color: var(--clay-dark)">Nivel:</span>
-              <span>{{ course.level }}</span>
-            </div>
-            <div class="flex items-center">
-              <span class="font-semibold mr-2" style="color: var(--clay-dark)">Precio:</span>
-              <span class="text-xl font-bold" style="color: var(--terracotta)">{{ course.price }}€</span>
+      <div class="fade-in-up">
+        <!-- Carousel Container -->
+        <div 
+          class="carousel-container"
+          @mouseenter="stopAutoplay"
+          @mouseleave="startAutoplay"
+          @touchstart="handleTouchStart"
+          @touchend="handleTouchEnd"
+        >
+          <!-- Images -->
+          <div class="carousel-images">
+            <div
+              v-for="(image, index) in images"
+              :key="index"
+              class="carousel-slide"
+              :class="{ active: index === currentIndex }"
+            >
+              <img :src="image" :alt="`Cerámica ${index + 1}`" />
             </div>
           </div>
 
+          <!-- Navigation Arrows (Desktop only) -->
           <button 
-            class="w-full px-4 py-2 rounded-lg text-white font-semibold transition-all hover:shadow-md"
-            style="background: var(--clay-dark)"
+            @click="prevSlide" 
+            class="carousel-arrow carousel-arrow-left"
+            aria-label="Anterior"
           >
-            Reservar Plaza
+            ‹
           </button>
-        </div>
-      </div>
-
-      <div class="ceramic-card bg-gradient-to-r from-clay-warm to-clay-dark text-white">
-        <div class="max-w-3xl mx-auto text-center">
-          <h3 class="text-white mb-4">¿Clases Privadas o en Grupo?</h3>
-          <p class="mb-6">
-            Ofrezco tanto clases privadas personalizadas como talleres grupales. 
-            Si tienes un grupo de amigos o familia interesados, puedo organizar 
-            una sesión especial adaptada a vuestras necesidades.
-          </p>
           <button 
-            class="px-8 py-3 bg-white rounded-lg font-semibold transition-all hover:shadow-lg"
-            style="color: var(--clay-dark)"
+            @click="nextSlide" 
+            class="carousel-arrow carousel-arrow-right"
+            aria-label="Siguiente"
           >
-            Consultar Disponibilidad
+            ›
           </button>
         </div>
       </div>
@@ -61,54 +50,72 @@
 </template>
 
 <script setup lang="ts">
-interface Course {
-  id: number
-  title: string
-  description: string
-  duration: string
-  level: string
-  price: number
-  icon: string
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const currentIndex = ref(0)
+const images = [
+  '/src/assets/clases/classes1.jpg',
+  '/src/assets/clases/classes2.jpg'
+]
+
+let autoplayInterval: number | null = null
+let touchStartX = 0
+let touchEndX = 0
+
+const nextSlide = () => {
+  currentIndex.value = (currentIndex.value + 1) % images.length
 }
 
-const courses: Course[] = [
-  {
-    id: 1,
-    title: 'Iniciación a la Cerámica',
-    description: 'Aprende las técnicas básicas de modelado, acabado y esmaltado. Perfecto para comenzar tu viaje en la cerámica.',
-    duration: '4 semanas (8 sesiones)',
-    level: 'Principiante',
-    price: 180,
-    icon: '🎓'
-  },
-  {
-    id: 2,
-    title: 'Torno para Principiantes',
-    description: 'Domina el torno alfarero desde cero. Aprende a centrar, levantar y dar forma a piezas cilíndricas.',
-    duration: '6 semanas (12 sesiones)',
-    level: 'Principiante',
-    price: 280,
-    icon: '🎡'
-  },
-  {
-    id: 3,
-    title: 'Técnicas Avanzadas',
-    description: 'Explora técnicas complejas de construcción, decoración y acabados especiales para ceramistas con experiencia.',
-    duration: '8 semanas (16 sesiones)',
-    level: 'Avanzado',
-    price: 350,
-    icon: '⭐'
-  },
-  {
-    id: 4,
-    title: 'Taller de Esmaltes',
-    description: 'Aprende a crear y aplicar esmaltes personalizados. Experimenta con colores, texturas y efectos especiales.',
-    duration: '4 semanas (8 sesiones)',
-    level: 'Intermedio',
-    price: 220,
-    icon: '🎨'
+const prevSlide = () => {
+  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length
+}
+
+const handleTouchStart = (e: TouchEvent) => {
+  if (e.changedTouches[0]) {
+    touchStartX = e.changedTouches[0].screenX
+    stopAutoplay()
   }
-]
+}
+
+const handleTouchEnd = (e: TouchEvent) => {
+  if (e.changedTouches[0]) {
+    touchEndX = e.changedTouches[0].screenX
+    handleSwipe()
+    startAutoplay()
+  }
+}
+
+const handleSwipe = () => {
+  const swipeThreshold = 50
+  const diff = touchStartX - touchEndX
+  
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      nextSlide()
+    } else {
+      prevSlide()
+    }
+  }
+}
+
+const startAutoplay = () => {
+  autoplayInterval = window.setInterval(nextSlide, 4000)
+}
+
+const stopAutoplay = () => {
+  if (autoplayInterval) {
+    clearInterval(autoplayInterval)
+    autoplayInterval = null
+  }
+}
+
+onMounted(() => {
+  startAutoplay()
+})
+
+onUnmounted(() => {
+  stopAutoplay()
+})
 </script>
 
 <style scoped>
@@ -118,5 +125,94 @@ const courses: Course[] = [
 
 .to-clay-dark {
   --tw-gradient-to: var(--clay-dark);
+}
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: #f5f5f5;
+}
+
+.carousel-images {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: var(--terracotta);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-arrow:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-arrow-left {
+  left: 0.75rem;
+}
+
+.carousel-arrow-right {
+  right: 0.75rem;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .carousel-container {
+    max-width: 100%;
+    border-radius: 0.75rem;
+    aspect-ratio: 1;
+    touch-action: pan-y;
+  }
+
+  /* Hide arrows on mobile */
+  .carousel-arrow {
+    display: none;
+  }
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="text-center elms-sans-title">Tienda del Taller</h2>
       <div class="accent-line mx-auto"></div>
-      <p class="text-align-left max-w-2xl mx-auto mb-12">
+      <p class="text-align-left elms-sans-text mb-8 mt-4">
         En La Tienda descubrirás detalles decorativos únicos y regalos perfectos para bodas y ocasiones especiales, o simplemente ese artículo que estabas buscando, todo a precios de taller.
       </p>
 
@@ -50,10 +50,10 @@
       </Teleport>
 
       <div class="text-center mt-8">
-        <p class="text-lg mb-4">¿Interesado en una pieza?</p>
+        <p class="text-lg mb-4 elms-sans-text">¿Interesado en una pieza?</p>
         <a 
           href="#contacto" 
-          class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg"
+          class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg elms-sans-button"
           style="background: linear-gradient(135deg, var(--clay-dark), var(--clay-warm))"
         >
           Contáctame

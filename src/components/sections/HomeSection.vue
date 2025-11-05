@@ -76,7 +76,7 @@ onUnmounted(() => {
     <div class="container">
       <div class="grid md:grid-cols-2 gap-0 items-center">
         <div class="fade-in-up">
-          <h1 class="elms-sans-title">Cerámica Gres Artesanal</h1>
+          <h1 class="elms-sans-title mt-4">Cerámica Gres Artesanal</h1>
           <div class="accent-line"></div>
         </div>
         
@@ -118,34 +118,32 @@ onUnmounted(() => {
             </button>
           </div>
 
+          <div class="button-group">
             <a 
-            href="#tienda" 
-            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6 mr-4"
-            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+              href="#tienda" 
+              class="button elms-sans-button"
             >
-            Ver Tienda
+              Ver Tienda
             </a>
             <a 
-            href="#clases" 
-            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6"
-            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+              href="#clases" 
+              class="button elms-sans-button"
             >
-            Clases
+              Clases
             </a>
             <a 
-            href="#quien-soy" 
-            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6 mr-4"
-            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+              href="#quien-soy" 
+              class="button elms-sans-button"
             >
-            Quién Soy
+              Quién Soy
             </a>
             <a 
-            href="#contacto" 
-            class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg mt-6"
-            style="background: linear-gradient(135deg, var(--terracotta), var(--clay-warm))"
+              href="#contacto" 
+              class="button elms-sans-button"
             >
-            Contacto
+              Contacto
             </a>
+          </div>
         </div>
       </div>
     </div>
@@ -250,9 +248,23 @@ onUnmounted(() => {
   }
 }
 
-.elms-sans-title {
-  font-family: "Elms Sans", sans-serif;
-  font-weight: bold;
-  font-size: 2rem;
+
+.button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, var(--terracotta), var(--clay-warm));
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 </style>
