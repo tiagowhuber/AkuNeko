@@ -69,7 +69,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="quien-soy" class="bg-white">
+  <section id="quien-soy" class="bg-white" style="font-family: 'Elms Sans', sans-serif;">
     <div class="container">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-center">Quién soy</h2>
