@@ -6,7 +6,6 @@ import QuienSoySection from './components/sections/QuienSoySection.vue'
 import TiendaSection from './components/sections/TiendaSection.vue'
 import ClasesSection from './components/sections/ClasesSection.vue'
 import ExposicionSection from './components/sections/ExposicionSection.vue'
-import TrabajosSection from './components/sections/TrabajosSection.vue'
 import ContactoSection from './components/sections/ContactoSection.vue'
 </script>
 
@@ -20,7 +19,6 @@ import ContactoSection from './components/sections/ContactoSection.vue'
       <ClasesSection />
       <QuienSoySection />
       <ExposicionSection />
-      <TrabajosSection />
       <ContactoSection />
     </main>
     

@@ -53,20 +53,6 @@
           </div>
         </div>
       </div>
-
-      <div class="mt-12 text-center ceramic-card bg-white">
-        <h3 class="mb-4 elms-sans-title">¿Interesado en colaborar?</h3>
-        <p class="mb-6 max-w-2xl mx-auto elms-sans-text">
-          Estoy abierta a exposiciones, colaboraciones artísticas y entrevistas. 
-          Si quieres trabajar conmigo, no dudes en contactarme.
-        </p>
-        <button 
-          class="px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg elms-sans-button"
-          style="background: var(--clay-dark)"
-        >
-          Contactar
-        </button>
-      </div>
     </div>
   </section>
 </template>
