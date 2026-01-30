@@ -1,22 +1,23 @@
 <template>
-  <section id="clases" class="bg-white">
-    <div class="container">
-      <h2 class="text-center elms-sans-title">Clases de Cerámica</h2>
-      <div class="accent-line mx-auto"></div>
-      <p class="text-center max-w-2xl mx-auto mb-12 elms-sans-text">
-        Este año hemos completado todos los cupos, pero los invitamos cordialmente a visitar nuestro taller.
-      </p>
+  <section id="clases" class="brutal-clases">
+    <div class="clases-container">
+      <div class="header-block">
+        <h2 class="brutal-title-clases">CLASES</h2>
+        <div class="subtitle-block">
+          <p class="elms-sans-text">
+            Este año hemos completado todos los cupos, pero los invitamos cordialmente a visitar nuestro taller.
+          </p>
+        </div>
+      </div>
 
-      <div class="fade-in-up">
-        <!-- Carousel Container -->
+      <div class="carousel-wrapper">
         <div 
-          class="carousel-container"
+          class="carousel-brutal-clases"
           @mouseenter="stopAutoplay"
           @mouseleave="startAutoplay"
           @touchstart="handleTouchStart"
           @touchend="handleTouchEnd"
         >
-          <!-- Images -->
           <div class="carousel-images">
             <div
               v-for="(image, index) in images"
@@ -28,22 +29,22 @@
             </div>
           </div>
 
-          <!-- Navigation Arrows (Desktop only) -->
           <button 
             @click="prevSlide" 
-            class="carousel-arrow carousel-arrow-left"
+            class="brutal-arrow brutal-arrow-left"
             aria-label="Anterior"
           >
-            ‹
+            ←
           </button>
           <button 
             @click="nextSlide" 
-            class="carousel-arrow carousel-arrow-right"
+            class="brutal-arrow brutal-arrow-right"
             aria-label="Siguiente"
           >
-            ›
+            →
           </button>
         </div>
+        <div class="image-counter">{{ currentIndex + 1 }}/{{ images.length }}</div>
       </div>
     </div>
   </section>
@@ -119,25 +120,107 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.from-clay-warm {
-  --tw-gradient-from: var(--clay-warm);
+.brutal-clases {
+  background: var(--brutal-white);
+  min-height: 100vh;
+  padding: 6rem 2rem 4rem;
+  border-top: 8px solid var(--brutal-black);
+  border-bottom: 8px solid var(--brutal-black);
+  overflow-x: hidden;
 }
 
-.to-clay-dark {
-  --tw-gradient-to: var(--clay-dark);
+@media (max-width: 640px) {
+  .brutal-clases {
+    padding: 4rem 1rem 3rem;
+    border-top: 6px solid var(--brutal-black);
+    border-bottom: 6px solid var(--brutal-black);
+  }
 }
 
-/* Carousel Styles */
-.carousel-container {
+.clases-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-block {
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 640px) {
+  .header-block {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.brutal-title-clases {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.5rem, 11vw, 12rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 4px var(--brutal-black);
+  text-stroke: 4px var(--brutal-black);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .brutal-title-clases {
+    font-size: clamp(2.3rem, 9vw, 5rem);
+    -webkit-text-stroke: 3px var(--brutal-black);
+    text-stroke: 3px var(--brutal-black);
+  }
+}
+
+.subtitle-block {
+  background: var(--terracotta);
+  padding: 2rem;
+  border: 4px solid var(--brutal-black);
+  max-width: 600px;
+  margin-left: auto;
+}
+
+@media (max-width: 640px) {
+  .subtitle-block {
+    padding: 1.5rem;
+    margin-left: 0;
+    border: 3px solid var(--brutal-black);
+  }
+  
+  .subtitle-block p {
+    font-size: 1rem;
+  }
+}
+
+.subtitle-block p {
+  font-size: 1.1rem;
+  color: var(--brutal-black);
+  font-weight: 500;
+  margin: 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carousel-brutal-clases {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto 1rem;
   aspect-ratio: 4/3;
+  border: 6px solid var(--brutal-black);
+  background: var(--brutal-black);
   overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  background: #f5f5f5;
+  box-shadow: -16px 16px 0 var(--clay-dark);
+}
+
+@media (max-width: 768px) {
+  .carousel-brutal-clases {
+    aspect-ratio: 1;
+    box-shadow: -10px 10px 0 var(--clay-dark);
+  }
 }
 
 .carousel-images {
@@ -153,7 +236,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.1s linear;
   pointer-events: none;
 }
 
@@ -169,50 +252,62 @@ onUnmounted(() => {
   display: block;
 }
 
-/* Navigation Arrows */
-.carousel-arrow {
+.brutal-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--brutal-black);
+  color: var(--cream);
   border: none;
-  font-size: 2.5rem;
-  line-height: 1;
-  padding: 0.5rem 0.75rem;
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 1rem 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: none;
   z-index: 10;
-  color: var(--terracotta);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: monospace;
 }
 
-.carousel-arrow:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.brutal-arrow:hover {
+  background: var(--terracotta);
+  color: var(--brutal-black);
 }
 
-.carousel-arrow-left {
-  left: 0.75rem;
+.brutal-arrow-left {
+  left: 0;
 }
 
-.carousel-arrow-right {
-  right: 0.75rem;
+.brutal-arrow-right {
+  right: 0;
 }
 
-/* Mobile Optimizations */
 @media (max-width: 768px) {
-  .carousel-container {
-    max-width: 100%;
-    border-radius: 0.75rem;
-    aspect-ratio: 1;
-    touch-action: pan-y;
-  }
-
-  /* Hide arrows on mobile */
-  .carousel-arrow {
+  .brutal-arrow {
     display: none;
+  }
+}
+
+.image-counter {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  background: var(--brutal-black);
+  color: var(--cream);
+  padding: 0.75rem 1.5rem;
+  font-weight: 900;
+  font-size: 1.5rem;
+  font-family: "Elms Sans", sans-serif;
+}
+
+@media (max-width: 640px) {
+  .carousel-wrapper {
+    margin-bottom: 3rem;
+  }
+  
+  .image-counter {
+    top: -40px;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
   }
 }
 </style>

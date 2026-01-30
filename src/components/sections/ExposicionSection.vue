@@ -1,55 +1,57 @@
 <template>
-  <section id="exposicion" class="bg-gradient-to-br from-cream to-white-clay elms-sans-section">
-    <div class="container">
-      <h2 class="text-center elms-sans-title">Exposiciones</h2>
-      <div class="accent-line mx-auto"></div>
-      <p class="text-center max-w-2xl mx-auto mb-12 elms-sans-text">
-        Mis trabajos han sido expuestos en diversas galerías y eventos. 
-        Aquí puedes ver algunos momentos destacados de mi trayectoria artística.
-      </p>
+  <section id="exposicion" class="brutal-exposicion">
+    <div class="expo-container">
+      <div class="title-expo-section">
+        <h2 class="brutal-title-expo">EXPOSICIONES</h2>
+        <div class="accent-line"></div>
+        <p class="intro-text">
+          Mis trabajos han sido expuestos en diversas galerías y eventos. 
+          Aquí puedes ver algunos momentos destacados de mi trayectoria artística.
+        </p>
+      </div>
 
-      <div class="mb-16">
-        <div class="grid-2">
-          <div class="ceramic-card" v-for="exhibition in exhibitions" :key="exhibition.id">
-            <div class="image-container" :style="{ height: '250px' }">
-              <img 
-                v-if="exhibition.image" 
-                :src="exhibition.image" 
-                :alt="exhibition.title"
-                class="exhibition-image"
-              />
-              <video 
-                v-else-if="exhibition.video"
-                :src="exhibition.video"
-                autoplay
-                loop
-                muted
-                playsinline
-                class="exhibition-video"
-              ></video>
-            </div>
-            <div class="flex justify-between items-start mb-3">
-              <h3 class="text-xl flex-1 elms-sans-text">{{ exhibition.title }}</h3>
-              <span class="text-sm px-3 py-1 rounded-full bg-clay-warm text-white elms-sans-text">
-                {{ exhibition.year }}
-              </span>
-            </div>
-            <p class="text-gray-600 mb-3 elms-sans-text">{{ exhibition.location }}</p>
+      <div class="exhibitions-brutal-grid">
+        <div class="exhibition-item" v-for="exhibition in exhibitions" :key="exhibition.id">
+          <div class="media-container">
+            <img 
+              v-if="exhibition.image" 
+              :src="exhibition.image" 
+              :alt="exhibition.title"
+              class="exhibition-media"
+            />
+            <video 
+              v-else-if="exhibition.video"
+              :src="exhibition.video"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="exhibition-media"
+            ></video>
+          </div>
+          <div class="exhibition-info">
+            <div class="year-badge">{{ exhibition.year }}</div>
+            <h3 class="exhibition-title">{{ exhibition.title }}</h3>
+            <p class="exhibition-location">{{ exhibition.location }}</p>
           </div>
         </div>
       </div>
 
-      <div>
-        <h3 class="text-center mb-8 elms-sans-title">Apariciones en Prensa</h3>
-        <div class="press-container">
-          <div class="ceramic-card text-center press-card" v-for="press in pressItems" :key="press.id">
-            <div v-if="press.image" class="press-image-container mb-4">
+      <div class="press-section">
+        <h3 class="press-title">PRENSA</h3>
+        <div class="press-grid">
+          <div class="press-item" v-for="press in pressItems" :key="press.id">
+            <div v-if="press.image" class="press-image-wrapper">
               <img :src="press.image" :alt="press.title" class="press-image" />
             </div>
-            <div v-else class="text-4xl mb-4">{{ press.icon }}</div>
-            <h4 class="font-semibold mb-2 elms-sans-text" style="color: var(--clay-dark)">{{ press.publication }}</h4>
-            <p class="text-sm text-gray-600 mb-2 elms-sans-text">{{ press.title }}</p>
-            <p class="text-xs elms-sans-text" style="color: var(--clay-warm)">{{ press.date }}</p>
+            <div v-else class="press-icon-wrapper">
+              <span class="press-icon">{{ press.icon }}</span>
+            </div>
+            <div class="press-content">
+              <div class="press-pub">{{ press.publication }}</div>
+              <p class="press-text">{{ press.title }}</p>
+              <div class="press-date">{{ press.date }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -133,87 +135,277 @@ const pressItems: PressItem[] = [
 </script>
 
 <style scoped>
-.from-cream {
-  --tw-gradient-from: var(--cream);
+.brutal-exposicion {
+  background: var(--cream);
+  min-height: 100vh;
+  padding: 6rem 2rem 4rem;
+  overflow-x: hidden;
 }
 
-.to-white-clay {
-  --tw-gradient-to: var(--white-clay);
+@media (max-width: 640px) {
+  .brutal-exposicion {
+    padding: 4rem 1rem 3rem;
+  }
 }
 
-.bg-clay-warm {
-  background-color: var(--clay-warm);
+.expo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
-.elms-sans-section {
+.title-expo-section {
+  margin-bottom: 5rem;
+  overflow-x: hidden;
+}
+
+.brutal-title-expo {
   font-family: "Elms Sans", sans-serif;
-}
-
-.elms-sans-text {
-  font-family: "Elms Sans", sans-serif;
-  font-weight: 300;
-}
-
-.elms-sans-title {
-  font-family: "Elms Sans", sans-serif;
-  font-weight: 600;
-}
-
-.elms-sans-button {
-  font-family: "Elms Sans", sans-serif;
-  font-weight: 500;
-}
-
-.image-container {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--brutal-black);
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--clay-warm) 0%, var(--clay-dark) 100%);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
-.exhibition-image,
-.exhibition-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
+@media (max-width: 640px) {
+  .brutal-title-expo {
+    font-size: clamp(2.2rem, 9vw, 4rem);
+    line-height: 0.9;
+  }
 }
 
-.ceramic-card:hover .exhibition-image,
-.ceramic-card:hover .exhibition-video {
-  transform: scale(1.05);
+.intro-text {
+  max-width: 500px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--brutal-black);
 }
 
-.press-container {
+.exhibitions-brutal-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 0;
+  border: 6px solid var(--brutal-black);
+  margin-bottom: 6rem;
 }
 
 @media (max-width: 768px) {
-  .press-container {
+  .exhibitions-brutal-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.press-image-container {
+@media (max-width: 640px) {
+  .title-expo-section {
+    margin-bottom: 3rem;
+  }
+  
+  .exhibitions-brutal-grid {
+    border: 4px solid var(--brutal-black);
+    margin-bottom: 4rem;
+  }
+  
+  .media-container {
+    height: 250px;
+  }
+  
+  .exhibition-info {
+    padding: 1.5rem;
+  }
+  
+  .year-badge {
+    top: -18px;
+    right: 15px;
+    padding: 0.4rem 1.2rem;
+    font-size: 1rem;
+    border: 2px solid var(--brutal-black);
+  }
+}
+
+.exhibition-item {
+  border: 3px solid var(--brutal-black);
+  background: var(--brutal-white);
+  transition: none;
+}
+
+.exhibition-item:hover {
+  background: var(--cream);
+}
+
+.media-container {
   width: 100%;
-  height: 200px;
-  border-radius: 8px;
+  height: 300px;
+  background: var(--brutal-black);
   overflow: hidden;
-  margin-bottom: 1rem;
+  position: relative;
+}
+
+.exhibition-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.exhibition-info {
+  padding: 2rem;
+  position: relative;
+}
+
+.year-badge {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: var(--terracotta);
+  color: var(--brutal-black);
+  padding: 0.5rem 1.5rem;
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  border: 3px solid var(--brutal-black);
+}
+
+.exhibition-title {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--brutal-black);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.exhibition-location {
+  color: var(--earth-brown);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.press-section {
+  border-top: 8px solid var(--brutal-black);
+  padding-top: 4rem;
+}
+
+.press-title {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--brutal-black);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+@media (max-width: 768px) {
+  .press-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .press-section {
+    padding-top: 3rem;
+  }
+  
+  .press-grid {
+    gap: 2rem;
+  }
+  
+  .press-item {
+    box-shadow: 6px 6px 0 var(--clay-warm);
+    border: 3px solid var(--brutal-black);
+  }
+  
+  .press-item:hover {
+    box-shadow: 3px 3px 0 var(--clay-warm);
+    transform: translate(3px, 3px);
+  }
+  
+  .press-content {
+    padding: 1.5rem;
+  }
+  
+  .press-image-wrapper {
+    height: 200px;
+  }
+}
+
+.press-item {
+  background: var(--brutal-white);
+  border: 4px solid var(--brutal-black);
+  padding: 0;
+  box-shadow: 8px 8px 0 var(--clay-warm);
+  transition: none;
+}
+
+.press-item:hover {
+  box-shadow: 4px 4px 0 var(--clay-warm);
+  transform: translate(4px, 4px);
+}
+
+.press-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-bottom: 4px solid var(--brutal-black);
 }
 
 .press-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
-.press-card:hover .press-image {
-  transform: scale(1.05);
+.press-icon-wrapper {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  border-bottom: 4px solid var(--brutal-black);
+}
+
+.press-icon {
+  font-size: 4rem;
+}
+
+.press-content {
+  padding: 2rem;
+}
+
+.press-pub {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--brutal-black);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.press-text {
+  font-size: 0.95rem;
+  color: var(--earth-brown);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.press-date {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 700;
+  color: var(--terracotta);
+  font-size: 0.9rem;
 }
 </style>

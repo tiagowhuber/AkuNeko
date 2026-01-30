@@ -28,12 +28,18 @@ import ContactoSection from './components/sections/ContactoSection.vue'
 
 <style scoped>
 .app-container {
-  padding-top: 68px; /* Height of fixed navbar */
+  padding-top: 82px; /* Height of brutal navbar */
 }
 
 @media (max-width: 768px) {
   .app-container {
-    padding-top: 60px;
+    padding-top: 75px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-container {
+    padding-top: 70px;
   }
 }
 </style>

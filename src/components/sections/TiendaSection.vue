@@ -1,46 +1,57 @@
 <template>
-  <section id="tienda" class="bg-gradient-to-br from-white-clay to-cream">
-    <div class="container">
-      <h2 class="text-center elms-sans-title">Tienda del Taller</h2>
-      <div class="accent-line mx-auto"></div>
-      <p class="text-align-left elms-sans-text mb-8 mt-4">
-        En La Tienda descubrirás detalles decorativos únicos y regalos perfectos para bodas y ocasiones especiales, o simplemente ese artículo que estabas buscando, todo a precios de taller.
-      </p>
+  <section id="tienda" class="brutal-tienda">
+    <div class="tienda-container">
+      <!-- Overlapping title treatment -->
+      <div class="title-overlap-container">
+        <h2 class="title-back">TIENDA</h2>
+        <h2 class="title-front">DEL TALLER</h2>
+      </div>
 
-      <!-- Instagram-style grid -->
-      <div class="instagram-grid mb-12">
+      <div class="brutal-intro">
+        <div class="accent-line"></div>
+        <p class="elms-sans-text">
+          Detalles decorativos únicos y regalos perfectos para bodas y ocasiones especiales, 
+          o simplemente ese artículo que estabas buscando, todo a precios de taller.
+        </p>
+      </div>
+
+      <!-- Tight uniform grid like reference -->
+      <div class="tight-grid">
         <div 
-          v-for="item in shopItems" 
+          v-for="(item, index) in shopItems" 
           :key="item.id"
-          class="grid-item"
+          class="grid-item-tight"
           @click="openModal(item)"
         >
-          <img :src="item.image" :alt="item.title" class="grid-image" />
-          <div class="grid-overlay">
-            <span class="overlay-icon">👁️</span>
+          <div class="item-image-brutal">
+            <img :src="item.image" :alt="item.title" class="brutal-img" />
+            <div class="item-overlay-tight">
+              <span class="item-price-overlay">{{ item.price }}€</span>
+              <span class="item-number-overlay">{{ String(index + 1).padStart(2, '0') }}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Modal -->
       <Teleport to="body">
-        <Transition name="modal">
-          <div v-if="selectedItem" class="modal-backdrop" @click="closeModal">
-            <div class="modal-content" @click.stop>
-              <button class="modal-close" @click="closeModal">&times;</button>
-              <div class="modal-grid">
-                <div class="modal-image-container">
-                  <img :src="selectedItem.image" :alt="selectedItem.title" class="modal-image" />
+        <Transition name="modal-brutal">
+          <div v-if="selectedItem" class="modal-backdrop-brutal" @click="closeModal">
+            <div class="modal-brutal" @click.stop>
+              <button class="modal-close-brutal" @click="closeModal">✕</button>
+              <div class="modal-layout">
+                <div class="modal-img-side">
+                  <img :src="selectedItem.image" :alt="selectedItem.title" class="modal-image-brutal" />
                 </div>
-                <div class="modal-info">
-                  <h3 class="modal-title">{{ selectedItem.title }}</h3>
-                  <p class="modal-description">{{ selectedItem.description }}</p>
-                  <div class="modal-price">{{ selectedItem.price }}€</div>
+                <div class="modal-info-side">
+                  <h3 class="modal-title-brutal">{{ selectedItem.title }}</h3>
+                  <div class="modal-price-brutal">{{ selectedItem.price }}€</div>
+                  <p class="modal-description-brutal">{{ selectedItem.description }}</p>
                   <button 
-                    class="modal-contact-btn"
+                    class="modal-contact-brutal"
                     @click="goToContact"
                   >
-                    Contactar para comprar
+                    CONTACTAR
                   </button>
                 </div>
               </div>
@@ -49,15 +60,16 @@
         </Transition>
       </Teleport>
 
-      <div class="text-center mt-8">
-        <p class="text-lg mb-4 elms-sans-text">¿Interesado en una pieza?</p>
-        <a 
-          href="#contacto" 
-          class="inline-block px-8 py-3 text-white rounded-lg font-semibold transition-all hover:shadow-lg elms-sans-button"
-          style="background: linear-gradient(135deg, var(--clay-dark), var(--clay-warm))"
-        >
-          Contáctame
-        </a>
+      <div class="cta-section-brutal">
+        <div class="cta-block">
+          <p class="cta-text">¿INTERESADO<br>EN UNA PIEZA?</p>
+          <a 
+            href="#contacto" 
+            class="btn-cta-brutal"
+          >
+            CONTACTO
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -178,230 +190,492 @@ const shopItems: ShopItem[] = [
 </script>
 
 <style scoped>
-.from-white-clay {
-  --tw-gradient-from: var(--white-clay);
+.brutal-tienda {
+  background: var(--brutal-white);
+  min-height: 100vh;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow-x: hidden;
 }
 
-.to-cream {
-  --tw-gradient-to: var(--cream);
-}
-
-/* Instagram-style grid */
-.instagram-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  max-width: 935px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .instagram-grid {
-    gap: 2px;
+@media (max-width: 640px) {
+  .brutal-tienda {
+    padding: 4rem 1rem 3rem;
   }
 }
 
-.grid-item {
-  position: relative;
-  aspect-ratio: 1;
-  cursor: pointer;
-  overflow: hidden;
-  background: #f0f0f0;
+.tienda-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
-.grid-image {
+/* Overlapping title effect */
+.title-overlap-container {
+  position: relative;
+  margin-bottom: 3rem;
+  height: clamp(120px, 20vw, 300px);
+}
+
+/* Apply larger spacing only on desktop */
+@media (min-width: 769px) {
+  .title-overlap-container {
+    margin-bottom: 12rem;
+  }
+}
+
+.title-back,
+.title-front {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  position: absolute;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .title-back,
+  .title-front {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+}
+
+.title-back {
+  color: transparent;
+  -webkit-text-stroke: 3px var(--brutal-black);
+  text-stroke: 3px var(--brutal-black);
+  top: 0;
+  left: 0;
+  z-index: 1; /* sit behind the front title */
+}
+
+.title-front {
+  color: var(--terracotta);
+  top: 144px; /* increased offset to avoid letter collisions */
+  left: 94px;
+  z-index: 2; /* ensure this sits above the stroked back title */
+  transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .title-front {
+    top: 6px;
+    left: 46px;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .title-overlap-container {
+    height: clamp(60px, 12vw, 120px);
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  
+  .title-back,
+  .title-front {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+  
+  .title-back {
+    -webkit-text-stroke: 2px var(--brutal-black);
+    text-stroke: 2px var(--brutal-black);
+  }
+  
+  .title-front {
+    top: 30px;
+    left: 8px;
+    z-index: 2;
+  }
+  
+  .brutal-intro {
+    margin-bottom: 2rem;
+  }
+}
+
+.brutal-intro {
+  max-width: 600px;
+  margin-bottom: 4rem;
+}
+
+/* Tight uniform grid like reference image */
+.tight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 5rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 6px solid var(--brutal-black);
+  background: var(--brutal-black);
+}
+
+@media (max-width: 768px) {
+  .tight-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .tight-grid {
+    grid-template-columns: repeat(2, 1fr);
+    border: 4px solid var(--brutal-black);
+  }
+}
+
+@media (max-width: 480px) {
+  .tight-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .item-price-overlay {
+    font-size: 2rem;
+  }
+}
+
+.grid-item-tight {
+  cursor: pointer;
+  position: relative;
+  transition: none;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.item-image-brutal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.brutal-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  display: block;
+  transition: none;
 }
 
-.grid-item:hover .grid-image {
-  transform: scale(1.05);
+.grid-item-tight:hover .brutal-img {
+  filter: contrast(1.2);
 }
 
-.grid-overlay {
+.item-overlay-tight {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--terracotta);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.05s linear;
 }
 
-.grid-item:hover .grid-overlay {
-  opacity: 1;
+.grid-item-tight:hover .item-overlay-tight {
+  opacity: 0.95;
 }
 
-.overlay-icon {
-  font-size: 2rem;
-  filter: grayscale(1) brightness(2);
+.item-price-overlay {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--brutal-black);
+  line-height: 1;
+}
+
+.item-number-overlay {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--brutal-white);
+  margin-top: 0.5rem;
+  letter-spacing: 0.2em;
 }
 
 /* Modal styles */
-.modal-backdrop {
+.modal-backdrop-brutal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   padding: 20px;
-  overflow-y: auto;
 }
 
-.modal-content {
-  background: white;
-  border-radius: 12px;
-  max-width: 900px;
+.modal-brutal {
+  background: var(--cream);
+  border: 6px solid var(--brutal-black);
+  max-width: 1000px;
   width: 100%;
   position: relative;
-  max-height: 90vh;
-  overflow: hidden;
-}
-
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: white;
-  border: none;
-  font-size: 2rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  line-height: 1;
-  color: #333;
-}
-
-.modal-close:hover {
-  background: #f5f5f5;
-  transform: scale(1.1);
-}
-
-.modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 400px;
+  box-shadow: 20px 20px 0 var(--terracotta);
 }
 
 @media (max-width: 768px) {
-  .modal-grid {
+  .modal-brutal {
+    box-shadow: 10px 10px 0 var(--terracotta);
+    border: 4px solid var(--brutal-black);
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-brutal {
+    box-shadow: 8px 8px 0 var(--terracotta);
+    border: 3px solid var(--brutal-black);
+    max-width: 95%;
+    margin: 1rem;
+  }
+}
+
+.modal-close-brutal {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: var(--terracotta);
+  color: var(--brutal-black);
+  border: 4px solid var(--brutal-black);
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-weight: 900;
+  font-family: "Elms Sans", sans-serif;
+  z-index: 10;
+}
+
+.modal-close-brutal:hover {
+  background: var(--brutal-black);
+  color: var(--terracotta);
+}
+
+@media (max-width: 768px) {
+  .modal-close-brutal {
+    top: -45px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-close-brutal {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    border: 3px solid var(--brutal-black);
+  }
+}
+
+.modal-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .modal-layout {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 640px) {
+  .modal-info-side {
+    padding: 1.5rem;
+  }
   
-  .modal-content {
-    max-height: 85vh;
-    overflow-y: auto;
+  .modal-title-brutal {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .modal-price-brutal {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-description-brutal {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-contact-brutal {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
   }
 }
 
-.modal-image-container {
-  background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.modal-img-side {
+  background: var(--brutal-black);
+  border-right: 6px solid var(--brutal-black);
 }
 
-.modal-image {
+@media (max-width: 768px) {
+  .modal-img-side {
+    border-right: none;
+    border-bottom: 6px solid var(--brutal-black);
+  }
+}
+
+.modal-image-brutal {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.modal-info {
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.modal-info-side {
+  padding: 3rem;
 }
 
 @media (max-width: 768px) {
-  .modal-info {
-    padding: 30px 20px;
+  .modal-info-side {
+    padding: 2rem;
   }
 }
 
-.modal-title {
-  font-size: 2rem;
+.modal-title-brutal {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  text-transform: uppercase;
   margin-bottom: 1rem;
-  color: var(--clay-dark);
-  font-weight: 600;
+  color: var(--brutal-black);
+  line-height: 1;
 }
 
-.modal-description {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-.modal-price {
-  font-size: 2.5rem;
-  font-weight: bold;
+.modal-price-brutal {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
   color: var(--terracotta);
+  font-family: "Elms Sans", sans-serif;
   margin-bottom: 2rem;
+  line-height: 1;
 }
 
-.modal-contact-btn {
-  padding: 15px 30px;
-  background: linear-gradient(135deg, var(--clay-dark), var(--clay-warm));
-  color: white;
-  border: none;
-  border-radius: 8px;
+.modal-description-brutal {
   font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: var(--brutal-black);
+  margin-bottom: 2rem;
+  line-height: 1.5;
 }
 
-.modal-contact-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+.modal-contact-brutal {
+  padding: 1.25rem 3rem;
+  background: var(--brutal-black);
+  color: var(--cream);
+  border: 4px solid var(--brutal-black);
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: "Elms Sans", sans-serif;
+  letter-spacing: 0.1em;
+  transition: none;
+}
+
+.modal-contact-brutal:hover {
+  background: var(--terracotta);
+  color: var(--brutal-black);
 }
 
 /* Modal transitions */
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
+.modal-brutal-enter-active,
+.modal-brutal-leave-active {
+  transition: opacity 0.1s linear;
 }
 
-.modal-enter-active .modal-content,
-.modal-leave-active .modal-content {
-  transition: transform 0.3s ease;
-}
-
-.modal-enter-from,
-.modal-leave-to {
+.modal-brutal-enter-from,
+.modal-brutal-leave-to {
   opacity: 0;
 }
 
-.modal-enter-from .modal-content,
-.modal-leave-to .modal-content {
-  transform: scale(0.9);
+/* CTA section */
+.cta-section-brutal {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.elms-sans-title {
+.cta-block {
+  background: var(--earth-brown);
+  border: 6px solid var(--brutal-black);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+  box-shadow: -15px 15px 0 var(--clay-warm);
+}
+
+@media (max-width: 768px) {
+  .cta-section-brutal {
+    justify-content: center;
+  }
+  
+  .cta-block {
+    padding: 2rem;
+    box-shadow: -10px 10px 0 var(--clay-warm);
+  }
+}
+
+@media (max-width: 640px) {
+  .cta-section-brutal {
+    margin-top: 4rem;
+  }
+  
+  .cta-block {
+    padding: 1.5rem;
+    box-shadow: -8px 8px 0 var(--clay-warm);
+    border: 4px solid var(--brutal-black);
+  }
+  
+  .cta-text {
+    font-size: 1.2rem;
+  }
+  
+  .btn-cta-brutal {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    border: 3px solid var(--brutal-black);
+  }
+}
+
+.cta-text {
   font-family: "Elms Sans", sans-serif;
-  font-weight: bold;
-  font-size: 2rem;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--cream);
+  margin: 0;
+}
+
+.btn-cta-brutal {
+  background: var(--terracotta);
+  color: var(--brutal-black);
+  border: 4px solid var(--brutal-black);
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  font-size: 1.1rem;
+  transition: none;
+}
+
+.btn-cta-brutal:hover {
+  background: var(--brutal-black);
+  color: var(--terracotta);
 }
 </style>

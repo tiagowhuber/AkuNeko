@@ -145,4 +145,4 @@ For questions or issues, please open an issue on the repository or contact the d
 
 ---
 
-Made with ❤️ for AkuNeko Ceramics
+Made with ❤️ for Aku Neko Ceramics

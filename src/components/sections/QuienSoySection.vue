@@ -69,22 +69,23 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="quien-soy" class="bg-white" style="font-family: 'Elms Sans', sans-serif;">
-    <div class="container">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-center">Quién soy</h2>
-        <div class="accent-line mx-auto"></div>
-        
-        <div class="grid md:grid-cols-2 gap-8 mb-8">
-          <!-- Carousel Container -->
+  <section id="quien-soy" class="brutal-quien-soy">
+    <div class="quien-container">
+      <div class="title-section">
+        <h2 class="brutal-title">QUIÉN SOY</h2>
+        <div class="accent-line"></div>
+      </div>
+      
+      <div class="content-layout">
+        <!-- Carousel -->
+        <div class="image-side">
           <div 
-            class="carousel-container"
+            class="carousel-brutal-quien"
             @mouseenter="stopAutoplay"
             @mouseleave="startAutoplay"
             @touchstart="handleTouchStart"
             @touchend="handleTouchEnd"
           >
-            <!-- Images -->
             <div class="carousel-images">
               <div
                 v-for="(image, index) in images"
@@ -96,35 +97,38 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- Navigation Arrows (Desktop only) -->
             <button 
               @click="prevSlide" 
-              class="carousel-arrow carousel-arrow-left"
+              class="brutal-arrow brutal-arrow-left"
               aria-label="Anterior"
             >
-              ‹
+              ←
             </button>
             <button 
               @click="nextSlide" 
-              class="carousel-arrow carousel-arrow-right"
+              class="brutal-arrow brutal-arrow-right"
               aria-label="Siguiente"
             >
-              ›
+              →
             </button>
           </div>
-          
-          <div class="flex flex-col justify-center">
-            <h3 class="mb-4">Catherine Huber</h3>
-            <p class="mb-4">
+        </div>
+        
+        <div class="text-side">
+          <div class="name-block">
+            <h3>CATHERINE<br>HUBER</h3>
+          </div>
+          <div class="bio-text">
+            <p>
               Catherine Huber se formó en cerámica en el taller Mugi y en el Hunter College en New York entre 1997 y 1998. Siguió su formación en el taller del Mestre Lele en Sao Paolo, Brasil en 1999.
             </p>
-            <p class="mb-4">
+            <p>
               Con formación de base en torno hoy su cerámica mezcla torno, modelado y escultura.
             </p>
-            <p class="mb-4">
+            <p>
               Nativa de Lausanne, Suiza, Catherine es enfermera de formación. Ha trabajado 15 años en los hospitales de Lausanne antes de alistarse al Comité Internacional de la Cruz Roja. Trabajo en Mozambique (África) para operar centros de salud perdidos en las selvas, luego a México (Chiapas), Angola y en Guatemala.
             </p>
-            <p class="mb-4">
+            <p>
               En 1999 abrió su primer taller en Sao Paolo, Brasil.
             </p>
             <p>
@@ -138,15 +142,87 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Carousel Styles */
-.carousel-container {
+.brutal-quien-soy {
+  background: var(--cream);
+  min-height: 100vh;
+  padding: 6rem 2rem 4rem;
+  overflow-x: hidden;
+}
+
+.quien-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.title-section {
+  margin-bottom: 4rem;
+}
+
+.brutal-title {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--brutal-black);
+}
+
+@media (max-width: 640px) {
+  .brutal-title {
+    font-size: clamp(2rem, 8.5vw, 3.5rem);
+  }
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .content-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .brutal-quien-soy {
+    padding: 4rem 1rem 3rem;
+  }
+  
+  .title-section {
+    margin-bottom: 2rem;
+  }
+  
+  .content-layout {
+    gap: 2rem;
+  }
+  
+  .carousel-brutal-quien {
+    box-shadow: 8px 8px 0 var(--clay-warm);
+  }
+  
+  .name-block {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .bio-text p {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.carousel-brutal-quien {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
+  border: 6px solid var(--brutal-black);
+  background: var(--brutal-black);
   overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  background: #f5f5f5;
+  box-shadow: 12px 12px 0 var(--clay-warm);
 }
 
 .carousel-images {
@@ -162,7 +238,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.1s linear;
   pointer-events: none;
 }
 
@@ -178,48 +254,68 @@ onUnmounted(() => {
   display: block;
 }
 
-/* Navigation Arrows */
-.carousel-arrow {
+.brutal-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--brutal-black);
+  color: var(--cream);
   border: none;
-  font-size: 2.5rem;
-  line-height: 1;
-  padding: 0.5rem 0.75rem;
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 1rem 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: none;
   z-index: 10;
-  color: var(--terracotta);
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: monospace;
 }
 
-.carousel-arrow:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.brutal-arrow:hover {
+  background: var(--clay-warm);
+  color: var(--brutal-black);
 }
 
-.carousel-arrow-left {
-  left: 0.75rem;
+.brutal-arrow-left {
+  left: 0;
 }
 
-.carousel-arrow-right {
-  right: 0.75rem;
+.brutal-arrow-right {
+  right: 0;
 }
 
-/* Mobile Optimizations */
 @media (max-width: 768px) {
-  .carousel-container {
-    border-radius: 0.75rem;
-    touch-action: pan-y;
-  }
-
-  /* Hide arrows on mobile */
-  .carousel-arrow {
+  .brutal-arrow {
     display: none;
   }
+}
+
+.name-block {
+  background: var(--brutal-black);
+  color: var(--cream);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 4px solid var(--brutal-black);
+}
+
+.name-block h3 {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: 0;
+}
+
+.bio-text {
+  font-family: "Elms Sans", sans-serif;
+  font-weight: 400;
+}
+
+.bio-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: var(--brutal-black);
 }
 </style>
